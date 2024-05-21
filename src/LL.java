@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 public class LL {
 
     private Node head;
@@ -72,6 +74,65 @@ public class LL {
         size++;
     }
 
+    // function to add a node at a particular index(n)
+    public void addIndex(int val, int n){
+        if(n==0){
+            addFirst(val);
+            return;
+        }
+        if(n==size){
+            addLast(val);
+            return;
+        }
+        Node temp = head;
+        for(int i=0;i<n-1;i++){
+            temp = temp.next;
+        }
+//        Node node = new Node(val);
+//        Node temp2 = temp.next;     // instead of this we can directly create a node with next value in constructor
+        Node node = new Node(val, temp.next);
+        temp.next = node;
+//        node.next = temp2;
+        size++;
+    }
+
+    // function to delete node from start
+    public int deleteFirst(){
+        if (head == null) { // Case for an empty list
+            throw new NoSuchElementException("List is empty");
+        }
+        int val = head.val;
+        if(size == 1){
+            head = null;
+            tail = null;
+        }
+        else{
+            head = head.next;
+        }
+        size--;
+        return val;
+    }
+
+    // function to delete the node from last
+    public int deleteLast(){
+        if(size <= 1){
+            return deleteFirst();
+        }
+        int val = tail.val;
+        Node secondLast = getNode(size - 2);
+        tail = secondLast;
+        tail.next = null;
+        return val;
+    }
+
+    private Node getNode(int index) {
+        Node node = head;
+        for(int i=0;i<index;i++){
+            node = node.next;
+        }
+        return node;
+    }
+
     // function to display the LL
     public void display(){
         Node temp = head;
@@ -80,6 +141,12 @@ public class LL {
             temp = temp.next;
         }
         System.out.print("null");
+        System.out.println();
+    }
+
+    // function to get the size of LL
+    public int getSize(){
+        return size;
     }
 
 }
