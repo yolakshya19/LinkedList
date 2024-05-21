@@ -125,6 +125,21 @@ public class LL {
         return val;
     }
 
+    // delete node from an index
+    public int deleteIndex(int index){
+        if(index==0){
+            return deleteFirst();
+        }
+        if(index==size-1){
+            return deleteLast();
+        }
+        Node prev = getNode(index-1);
+        int val = prev.next.val;
+        prev.next = prev.next.next;
+        size--;
+        return val;
+    }
+
     private Node getNode(int index) {
         Node node = head;
         for(int i=0;i<index;i++){

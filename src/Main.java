@@ -20,5 +20,7 @@ public class Main {
         System.out.println("size is " + list2.getSize());
         System.out.println(list.deleteLast());
         list.display();
+        System.out.println(list.deleteIndex(3));
+        list.display();
     }
 }
